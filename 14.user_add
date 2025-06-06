@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>新增使用者</title>
+</head>
+<body>
+<?php        
+    // 關閉 PHP 錯誤訊息顯示（可避免錯誤資訊外洩，開發時建議開啟）
+    error_reporting(0);
+
+    // 啟動 Session 功能（用來判斷是否已登入）
+    session_start();
+
+    // 檢查使用者是否已登入（Session 中是否有 "id"）
+    if (!$_SESSION["id"]) {
+        // 若未登入，顯示提示訊息
+        echo "請登入帳號";
+
+        // 3 秒後自動跳轉回登入頁面 (2.login.html)
+        echo "<meta http-equiv=REFRESH content='3; url=2.login.html'>";
+    }
+    else {
+        // 若已登入，顯示新增使用者的表單
+        echo "
+            <form action='15.user_add.php' method='post'>
+                帳號：<input type='text' name='id'><br>
+                密碼：<input type='password' name='pwd'><p></p>
+                <input type='submit' value='新增'> 
+                <input type='reset' value='清除'>
+            </form>
+        ";
+    }
+?>
+</body>
+</html>
